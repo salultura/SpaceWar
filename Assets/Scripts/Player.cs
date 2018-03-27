@@ -28,18 +28,34 @@ public class Player : MonoBehaviour
         float eixoZ = Input.GetAxis("Vertical");
         Vector3 direcao = new Vector3(eixoX, 0, eixoZ);
 
-        rb.MovePosition(direcao * velocidade * Time.deltaTime) ;
+        MovimentarNave(direcao);
 
-        rb.position = new Vector3(
-                                    Mathf.Clamp(rb.position.x, limite.xMin, limite.xMax),
+        AplicarLimitesDaTela();
+
+        RotacionarNave(eixoX);
+    }
+
+    private void MovimentarNave(Vector3 direcao)
+    {
+        rb.MovePosition(rb.position + (direcao * velocidade * Time.deltaTime));
+    }
+
+    private void AplicarLimitesDaTela()
+    {
+        rb.position = new Vector3(  Mathf.Clamp(rb.position.x, limite.xMin, limite.xMax),
                                     0.0f,
                                     Mathf.Clamp(rb.position.z, limite.zMin, limite.zMax));
+    }
 
-        rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -anguloRotacao);
+    private void RotacionarNave(float eixoX)
+    {
+        rb.rotation = Quaternion.Euler(0.0f, 0.0f, eixoX * -anguloRotacao);
     }
 
     private void PosicionarJogador()
     {
         rb.position = new Vector3(0, 0, 0);
     }
+
+
 }
