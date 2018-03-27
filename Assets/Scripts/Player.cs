@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour
 
         AplicarLimitesDaTela();
 
-        RotacionarNave(eixoX);
+        RotacionarNaveNoEixoZ(eixoX);
     }
 
     private void MovimentarNave(Vector3 direcao)
@@ -42,13 +43,14 @@ public class Player : MonoBehaviour
 
     private void AplicarLimitesDaTela()
     {
-        rb.position = new Vector3(  Mathf.Clamp(rb.position.x, limite.xMin, limite.xMax),
+        rb.position = new Vector3(Mathf.Clamp(rb.position.x, limite.xMin, limite.xMax),
                                     0.0f,
                                     Mathf.Clamp(rb.position.z, limite.zMin, limite.zMax));
     }
 
-    private void RotacionarNave(float eixoX)
+    private void RotacionarNaveNoEixoZ(float eixoX)
     {
+        // A rotacao da nave baseada conforme o jogador a movimenta pelos lados.
         rb.rotation = Quaternion.Euler(0.0f, 0.0f, eixoX * -anguloRotacao);
     }
 
@@ -56,6 +58,4 @@ public class Player : MonoBehaviour
     {
         rb.position = new Vector3(0, 0, 0);
     }
-
-
 }
