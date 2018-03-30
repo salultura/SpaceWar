@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LimitesDaTela
 {
-
     private float xMin;
     private float xMax;
     private float zMin;

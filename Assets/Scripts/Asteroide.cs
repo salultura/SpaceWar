@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControleAsteroide : MonoBehaviour
+public class Asteroide : MonoBehaviour
 {
     public float velocidade = 6;
     private Rigidbody rb;
@@ -28,7 +28,7 @@ public class ControleAsteroide : MonoBehaviour
 
     private void SortearSkinDoAsteroide()
     {
-        int sorteiaAsteroide = Random.Range(1, 25);
+        int sorteiaAsteroide = Random.Range(0, 24);
         transform.GetChild(sorteiaAsteroide).gameObject.SetActive(true);
     }
 
@@ -41,5 +41,10 @@ public class ControleAsteroide : MonoBehaviour
     {
         Quaternion taxaDeRotacao = Quaternion.Euler(new Vector3(15, 30, 45) * Time.deltaTime);
         rb.MoveRotation(rb.rotation * taxaDeRotacao);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
     }
 }
