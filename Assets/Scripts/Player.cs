@@ -11,6 +11,7 @@ public class Limite
 
 public class Player : MonoBehaviour
 {
+    public GameObject laser;
     private Rigidbody rb;
     public float velocidade = 10;
     public Limite limite;
@@ -21,6 +22,14 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         PosicionarJogador();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            Atirar();
+        }
     }
 
     void FixedUpdate()
@@ -57,5 +66,10 @@ public class Player : MonoBehaviour
     private void PosicionarJogador()
     {
         rb.position = new Vector3(0, 0, 0);
+    }
+
+    private void Atirar()
+    {
+        Instantiate(laser, transform.position, Quaternion.identity);
     }
 }
